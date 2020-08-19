@@ -5,9 +5,6 @@ ports:
   - port: 5001
     onOpen: open-preview
 
-tasks:
-  - init: 'echo "TODO: Replace with init/build command"'
-    command: dotnet build Milestone
 
 vscode:
   extensions:
