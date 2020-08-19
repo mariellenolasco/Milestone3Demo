@@ -33,7 +33,7 @@ namespace Lodging.DataAccess.Tests
                 using (var ctx = new LodgingContext(_options))
                 {
                     await ctx.Database.EnsureCreatedAsync();
-                    await ctx.Lodgings.AddAsync(lodging);
+                    await ctx.Lodging.AddAsync(lodging);
                     await ctx.Rentals.AddAsync(rental);
                     await ctx.Reviews.AddAsync(review);
                     await ctx.SaveChangesAsync();
@@ -46,7 +46,7 @@ namespace Lodging.DataAccess.Tests
                     await lodgings.DeleteAsync(1);
                     await ctx.SaveChangesAsync();
 
-                    Assert.Empty(await ctx.Lodgings.ToListAsync());
+                    Assert.Empty(await ctx.Lodging.ToListAsync());
                 }
 
                 using (var ctx = new LodgingContext(_options))
@@ -95,7 +95,7 @@ namespace Lodging.DataAccess.Tests
                     await lodgings.InsertAsync(lodging);
                     await ctx.SaveChangesAsync();
 
-                    Assert.NotEmpty(await ctx.Lodgings.ToListAsync());
+                    Assert.NotEmpty(await ctx.Lodging.ToListAsync());
                 }
 
                 using (var ctx = new LodgingContext(_options))
@@ -225,7 +225,7 @@ namespace Lodging.DataAccess.Tests
                 using (var ctx = new LodgingContext(_options))
                 {
                     await ctx.Database.EnsureCreatedAsync();
-                    await ctx.Lodgings.AddAsync(lodging);
+                    await ctx.Lodging.AddAsync(lodging);
                     await ctx.Rentals.AddAsync(rental);
                     await ctx.Reviews.AddAsync(review);
                     await ctx.SaveChangesAsync();
@@ -234,13 +234,13 @@ namespace Lodging.DataAccess.Tests
                 using (var ctx = new LodgingContext(_options))
                 {
                     var lodgings = new Repository<LodgingModel>(ctx);
-                    var expected = await ctx.Lodgings.FirstAsync();
+                    var expected = await ctx.Lodging.FirstAsync();
 
                     expected.Name = "name";
                     lodgings.Update(expected);
                     await ctx.SaveChangesAsync();
 
-                    var actual = await ctx.Lodgings.FirstAsync();
+                    var actual = await ctx.Lodging.FirstAsync();
 
                     Assert.Equal(expected, actual);
                 }
