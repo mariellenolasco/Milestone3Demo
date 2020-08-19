@@ -29,11 +29,13 @@ namespace Lodging.WebAPI.Controllers
         {
             try
             {
-                return Ok(await _unitOfWork.Review.SelectAsync(id));
+                var result = await _unitOfWork.Review.SelectAsync(id);
+                if (result == null) return NotFound(id);
+                return Ok(result);
             }
             catch
             {
-                return NotFound(id);
+                return StatusCode(500);
             }
         }
 
