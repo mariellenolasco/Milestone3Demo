@@ -24,7 +24,7 @@ namespace Lodging.WebAPI.Controllers
         }
 
         // GET: api/Lodging/5
-        [HttpGet("{id}", Name = "GetAsync")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync(int id)
         {
             try
