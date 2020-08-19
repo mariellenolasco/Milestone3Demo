@@ -7,55 +7,54 @@ namespace Lodging.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LodgingController : ControllerBase
+    public class RentalController : ControllerBase
     {
         private readonly UnitOfWork _unitOfWork;
 
-        public LodgingController(UnitOfWork unitOfWork)
+        public RentalController(UnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        // GET: api/Lodging
+        // GET: api/Rental
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
-            return Ok(await _unitOfWork.Lodging.SelectAsync());
+            return Ok(await _unitOfWork.Rental.SelectAsync()); ;
         }
 
-        // GET: api/Lodging/5
+        // GET: api/Rental/5
         [HttpGet("{id}", Name = "GetAsync")]
         public async Task<IActionResult> GetAsync(int id)
         {
             try
             {
-                return Ok(await _unitOfWork.Lodging.SelectAsync(id));
+                return Ok(await _unitOfWork.Rental.SelectAsync(id));
             }
-            catch 
+            catch
             {
-
                 return NotFound(id);
             }
         }
 
-        // POST: api/Lodging
+        // POST: api/Rental
         [HttpPost]
-        public async Task<IActionResult> PostAsync(LodgingModel lodging)
+        public async Task<IActionResult> PostAsync(RentalModel rental)
         {
-            await _unitOfWork.Lodging.InsertAsync(lodging);
+            await _unitOfWork.Rental.InsertAsync(rental);
             await _unitOfWork.CommitAsync();
 
-            return Accepted(lodging);
+            return Accepted(rental);
         }
 
-        // PUT: api/Lodging/5
+        // PUT: api/Rental/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(LodgingModel lodging)
+        public async Task<IActionResult> PutAsync(RentalModel rental)
         {
-            _unitOfWork.Lodging.Update(lodging);
+            _unitOfWork.Rental.Update(rental);
             await _unitOfWork.CommitAsync();
 
-            return Accepted(lodging);
+            return Accepted(rental);
         }
 
         // DELETE: api/ApiWithActions/5
@@ -64,7 +63,7 @@ namespace Lodging.WebAPI.Controllers
         {
             try
             {
-                await _unitOfWork.Lodging.DeleteAsync(id);
+                await _unitOfWork.Rental.DeleteAsync(id);
                 await _unitOfWork.CommitAsync();
 
                 return NoContent();

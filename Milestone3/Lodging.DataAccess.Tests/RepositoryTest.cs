@@ -2,7 +2,9 @@
 using Lodging.Models;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace Lodging.DataAccess.Tests
@@ -16,9 +18,9 @@ namespace Lodging.DataAccess.Tests
         {
           new object[]
           {
-            new LodgingModel() { Id = 1 },
-            new RentalModel() { Id = 1 },
-            new ReviewModel() { Id = 1 }
+            new LodgingModel() { Id = 2 },
+            new RentalModel() { Id = 2 },
+            new ReviewModel() { Id = 2 }
           }
         };
 
@@ -43,30 +45,33 @@ namespace Lodging.DataAccess.Tests
                 {
                     var lodgings = new Repository<LodgingModel>(ctx);
 
-                    await lodgings.DeleteAsync(1);
+                    await lodgings.DeleteAsync(2);
                     await ctx.SaveChangesAsync();
 
-                    Assert.Empty(await ctx.Lodging.ToListAsync());
+                    var result = await ctx.Lodging.Select(x => x.Id == 2).ToListAsync();
+                    Assert.False(result[0]);
                 }
 
                 using (var ctx = new LodgingContext(_options))
                 {
                     var rentals = new Repository<RentalModel>(ctx);
 
-                    await rentals.DeleteAsync(1);
+                    await rentals.DeleteAsync(2);
                     await ctx.SaveChangesAsync();
 
-                    Assert.Empty(await ctx.Rentals.ToListAsync());
+                    var result = await ctx.Rentals.Select(x => x.Id == 2).ToListAsync();
+                    Assert.False(result[0]);
                 }
 
                 using (var ctx = new LodgingContext(_options))
                 {
                     var reviews = new Repository<ReviewModel>(ctx);
 
-                    await reviews.DeleteAsync(1);
+                    await reviews.DeleteAsync(2);
                     await ctx.SaveChangesAsync();
 
-                    Assert.Empty(await ctx.Reviews.ToListAsync());
+                    var result = await ctx.Reviews.Select(x => x.Id == 2).ToListAsync();
+                    Assert.False(result[0]);
                 }
             }
             finally
@@ -142,7 +147,7 @@ namespace Lodging.DataAccess.Tests
 
                     var actual = await lodgings.SelectAsync();
 
-                    Assert.Empty(actual);
+                    Assert.NotEmpty(actual);
                 }
 
                 using (var ctx = new LodgingContext(_options))
@@ -151,7 +156,7 @@ namespace Lodging.DataAccess.Tests
 
                     var actual = await rentals.SelectAsync();
 
-                    Assert.Empty(actual);
+                    Assert.NotEmpty(actual);
                 }
 
                 using (var ctx = new LodgingContext(_options))
@@ -160,7 +165,7 @@ namespace Lodging.DataAccess.Tests
 
                     var actual = await reviews.SelectAsync();
 
-                    Assert.Empty(actual);
+                    Assert.NotEmpty(actual);
                 }
             }
             finally
@@ -185,7 +190,7 @@ namespace Lodging.DataAccess.Tests
                 {
                     var lodgings = new Repository<LodgingModel>(ctx);
 
-                    var actual = await lodgings.SelectAsync(1);
+                    var actual = await lodgings.SelectAsync(2);
 
                     Assert.Null(actual);
                 }
@@ -194,7 +199,7 @@ namespace Lodging.DataAccess.Tests
                 {
                     var rentals = new Repository<RentalModel>(ctx);
 
-                    var actual = await rentals.SelectAsync(1);
+                    var actual = await rentals.SelectAsync(2);
 
                     Assert.Null(actual);
                 }
@@ -203,7 +208,7 @@ namespace Lodging.DataAccess.Tests
                 {
                     var reviews = new Repository<ReviewModel>(ctx);
 
-                    var actual = await reviews.SelectAsync(1);
+                    var actual = await reviews.SelectAsync(2);
 
                     Assert.Null(actual);
                 }
