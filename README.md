@@ -1,7 +1,21 @@
-# Milestone3Demo
-M3 Demo 
+# Milestone 3
+Milestone 3 base code for the corporate batch
 
-## Testing Code
+## Overview
+The Lodging API is almost complete! With the models and data access projects fully implemented, and the controllers set up, it's almost done. The controllers just need the required logic implemented to be able to return the proper responses to client requests.
+
+### Goal
+Your goal as a developer is to provide the missing controller method implementations such that they:
+    <ol>
+        <li> Comply with the behavior and design described in the solution design document </li>
+        <li> Pass all the unit tests </li>
+        <li> Pass all the integration tests </li>
+    </ol>
+
+### Hint
+The ```GetAsync()``` method of the ```LodgingController``` is fully implemented to show you how to use the components to get the required response. 
+
+## Checking your work
 To test if your implementations work as intended run the command ``` dotnet test ``` while in the Milestone3 directory
 
 ## Running the Demo
