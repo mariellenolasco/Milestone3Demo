@@ -1,6 +1,7 @@
 ﻿using Lodging.DataAccess.Repositories;
 using Lodging.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Lodging.WebAPI.Controllers
@@ -20,60 +21,35 @@ namespace Lodging.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
-            return Ok(await _unitOfWork.Review.SelectAsync());
+            throw new NotImplementedException();
         }
 
         // GET: api/Review/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync(int id)
         {
-            try
-            {
-                var result = await _unitOfWork.Review.SelectAsync(id);
-                if (result == null) return NotFound(id);
-                return Ok(result);
-            }
-            catch
-            {
-                return StatusCode(500);
-            }
+            throw new NotImplementedException();
         }
 
         // POST: api/Review
         [HttpPost]
         public async Task<IActionResult> PostAsync(ReviewModel review)
         {
-            await _unitOfWork.Review.InsertAsync(review);
-            await _unitOfWork.CommitAsync();
-
-            return Accepted(review);
+            throw new NotImplementedException();
         }
 
         // PUT: api/Review/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAsync(ReviewModel review)
         {
-            _unitOfWork.Review.Update(review);
-            await _unitOfWork.CommitAsync();
-
-            return Accepted(review);
+            throw new NotImplementedException();
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            try
-            {
-                await _unitOfWork.Review.DeleteAsync(id);
-                await _unitOfWork.CommitAsync();
-
-                return NoContent();
-            }
-            catch
-            {
-                return NotFound(id);
-            }
+            throw new NotImplementedException();
         }
     }
 }
